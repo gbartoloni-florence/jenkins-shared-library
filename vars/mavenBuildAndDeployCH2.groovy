@@ -1,10 +1,16 @@
 def call(Map input) {
   pipeline {
-    agent any
+    agent {
+      docker {
+        image 'maven:3.8.6-jdk-8'
+      }
+    }
     stages {
       stage('Checkout Repository') {
         steps {
-          echo 'Hello World'
+          script {
+            sh 'mcn clean package'
+          }
         }
       }
     }
