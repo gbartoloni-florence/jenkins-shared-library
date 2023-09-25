@@ -4,8 +4,9 @@ def call(Map input) {
     stages {
       stage('Package') {
         agent {
-          docker.withServer("tcp://docker.for.mac.host.internal:2376") {
+          docker {
             image 'maven:3.8.6-jdk-8'
+            server("tcp://docker.for.mac.host.internal:2376")
           }
         }
         steps {
