@@ -3,7 +3,7 @@ def call(Map input) {
     stages {
       stage('Checkout Repository') {
         steps {
-          shell('echo Hello World!')
+          echo 'Hello World'
         }
       }
     }
