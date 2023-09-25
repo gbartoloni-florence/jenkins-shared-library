@@ -6,7 +6,6 @@ def call(Map input) {
         agent {
           docker {
             image 'maven:3.8.6-jdk-8'
-            server("tcp://docker.for.mac.host.internal:2376")
           }
         }
         steps {
