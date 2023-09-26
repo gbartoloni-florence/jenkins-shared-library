@@ -10,7 +10,7 @@ def call(Map input) {
         }
         steps {
           script {
-            sh 'mvn clean package'
+            sh 'mvn -B clean package'
           }
         }
       }
