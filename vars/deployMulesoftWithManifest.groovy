@@ -1,4 +1,4 @@
-def call(Map input) {
+def call(String environment) {
   pipeline {
     agent any
     stages {
@@ -11,6 +11,7 @@ def call(Map input) {
         steps {
           script {
             echo params.Application
+            echo environment
           }
         }
       }
