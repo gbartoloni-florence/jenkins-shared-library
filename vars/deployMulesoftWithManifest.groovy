@@ -1,3 +1,6 @@
+import groovy.json.JsonSlurper
+
+
 def call(String environment) {
   pipeline {
     agent {
@@ -22,6 +25,10 @@ def call(String environment) {
             echo environment
             sh "npm install -g anypoint-cli-v4"
             sh "anypoint-cli-v4 --version"
+
+            def jsonSlurper = new JsonSlurper()
+            def config = jsonSlurper.parse(new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.json"))
+            echo "config = $config"
           }
         }
       }
