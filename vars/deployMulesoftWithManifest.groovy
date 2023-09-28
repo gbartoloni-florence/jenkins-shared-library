@@ -3,12 +3,15 @@ def call(String environment) {
     agent any
     stages {
       stage('Package') {
-        agent {
-          docker {
-            image 'maven:3.8.6-jdk-8'
-          }
-        }
         steps {
+          dir('manifests') {
+            git(
+              url: "https://github.com/gbartoloni-florence/mulesoft-manifests.git",
+              branch: "main",
+              changelog: true,
+              poll: false
+            )
+          }
           script {
             echo params.Application
             echo environment
