@@ -1,6 +1,11 @@
 def call(String environment) {
   pipeline {
-    agent any
+    agent {
+      docker {
+        image 'node:18.14.0-alpine3.17'
+        reuseNode true
+      }
+    }
     stages {
       stage('Package') {
         steps {
@@ -15,6 +20,8 @@ def call(String environment) {
           script {
             echo params.Application
             echo environment
+            sh "npm install -g anypoint-cli-v4"
+            sh "anypoint-cli-v4 --version"
           }
         }
       }
