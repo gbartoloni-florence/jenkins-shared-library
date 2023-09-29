@@ -23,8 +23,8 @@ def call(String environment) {
           script {
             echo params.Application
             echo environment
-            sh "npm install -g anypoint-cli-v4"
-            sh "anypoint-cli-v4 --version"
+            // sh "npm install -g anypoint-cli-v4"
+            // sh "anypoint-cli-v4 --version"
 
             Yaml parser = new Yaml()
             Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.json")).text)
