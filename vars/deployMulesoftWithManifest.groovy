@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurper
+import org.yaml.snakeyaml.Yaml
 
 
 def call(String environment) {
@@ -26,8 +26,8 @@ def call(String environment) {
             sh "npm install -g anypoint-cli-v4"
             sh "anypoint-cli-v4 --version"
 
-            def jsonSlurper = new JsonSlurper()
-            def config = jsonSlurper.parse(new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.json"))
+            Yaml parser = new Yaml()
+            Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.json")).text)
             echo "config = $config"
           }
         }
