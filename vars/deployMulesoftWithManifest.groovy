@@ -28,7 +28,7 @@ def call(String environment) {
 
             Yaml parser = new Yaml()
             Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.yaml")).text)
-            echo "config = $config"
+            echo config.toString()
           }
         }
       }
