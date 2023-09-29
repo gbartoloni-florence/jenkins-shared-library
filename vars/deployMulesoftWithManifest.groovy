@@ -27,7 +27,7 @@ def call(String environment) {
             // sh "anypoint-cli-v4 --version"
 
             Yaml parser = new Yaml()
-            Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.json")).text)
+            Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.yaml")).text)
             echo "config = $config"
           }
         }
