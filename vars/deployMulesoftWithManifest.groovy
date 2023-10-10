@@ -1,5 +1,9 @@
-import org.yaml.snakeyaml.Yaml
+@GrabResolver(name='mulesoft', root='https://repository-master.mulesoft.org/nexus/content/repositories/releases')
+@Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
+
+import org.yaml.snakeyaml.Yaml
+import org.mule.tools.model.anypoint.Cloudhub2Deployment
 
 def call(String environment) {
   pipeline {
@@ -29,6 +33,9 @@ def call(String environment) {
             Yaml parser = new Yaml()
             Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.yaml")).text)
             echo "config = $configuration"
+
+            Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
+            ch2deployment.setvCores("0.1")
           }
         }
       }
