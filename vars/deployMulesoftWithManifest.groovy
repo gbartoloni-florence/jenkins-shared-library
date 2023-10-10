@@ -32,7 +32,7 @@ def call(String environment) {
                         // sh "anypoint-cli-v4 --version"
 
                         Yaml parser = new Yaml()
-                        Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + ".manifest.yaml")).text)
+                        Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml")).text)
                         echo "config = $configuration"
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
