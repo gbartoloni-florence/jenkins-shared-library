@@ -38,7 +38,6 @@ def call(String environment) {
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
                         ch2deployment.setEnvironment("Dev")
-                        Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setApplicationName(params.Application + "-" + environment)
 
                         echo ch2deployment.getApplicationName()
