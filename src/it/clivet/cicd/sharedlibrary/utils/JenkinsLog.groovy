@@ -8,7 +8,7 @@ class JenkinsLog implements DeployerLog {
 
                         
 
-  private Logger log = Logger.getLogger('org.example.jobdsl')
+  private Logger log = Logger.getLogger('it.clivet.cicd.sharedlibrary.utils.JenkinsLog')
 
   public JenkinsLog() {
     this.log = log;
