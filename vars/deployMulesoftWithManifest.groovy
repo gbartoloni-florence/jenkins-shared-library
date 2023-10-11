@@ -65,6 +65,7 @@ def call(String environment) {
 
                         println binding
 
+                        // https://docs.groovy-lang.org/docs/next/html/documentation/template-engines.html#_gstringtemplateengine
                         def engine = new groovy.text.SimpleTemplateEngine()
                         def template = engine.createTemplate(manifest).make(binding)
 

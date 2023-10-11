@@ -7,6 +7,9 @@ import com.cloudbees.plugins.credentials.Credentials
 import com.cloudbees.plugins.credentials.CredentialsProvider
 
 class CredentialRetriever {
+
+    // https://scriptcrunch.com/groovy-script-retrieve-jenkins-credentials/
+    
     public static List<com.cloudbees.plugins.credentials.Credentials> getCredentials(List<String> secretIds) {
         def list = []
 

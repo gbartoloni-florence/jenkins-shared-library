@@ -1,6 +1,9 @@
 def call(Map input) {
   pipeline {
     agent any
+    environment {
+      SETTINGS_XML = credentials(input['MAVEN_SETTINGS']) //TODO: Create new dedicated credentials for AXPO
+    }
     stages {
       stage('Package') {
         agent {
