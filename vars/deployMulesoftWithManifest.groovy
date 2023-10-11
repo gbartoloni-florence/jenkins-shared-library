@@ -1,4 +1,9 @@
 import org.mule.tools.model.anypoint.Cloudhub2DeploymentSettings
+import org.mule.tools.model.anypoint.Http
+import org.mule.tools.model.anypoint.Inbound
+import org.mule.tools.model.anypoint.Integration
+import org.mule.tools.model.anypoint.ObjectStoreV2
+import org.mule.tools.model.anypoint.Service
 @GrabResolver(name='mulesoft', root='https://repository.mulesoft.org/releases')
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
@@ -8,7 +13,7 @@ import org.mule.tools.model.anypoint.Cloudhub2Deployment
 import org.mule.tools.deployment.DefaultDeployer;
 import org.mule.tools.deployment.Deployer;
 import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
-import it.clivet.cicd.sharedlibrary.model.ApplicationDeploymentConfiguration
+import it.clivet.cicd.sharedlibrary.model.ApplicationCloudHub2DeploymentConfiguration
 import it.clivet.cicd.sharedlibrary.utils.JenkinsLog
 
 import static org.mule.tools.validation.DeploymentValidatorFactory.createDeploymentValidator;
@@ -66,7 +71,7 @@ def call(String environment) {
                         Map configurationWithSecrets = parser.load(template.toString())
                         echo "config = $configurationWithSecrets"
 
-                        def appConf = ApplicationDeploymentConfiguration.loadFromYaml(template.toString())
+                        def appConf = ApplicationCloudHub2DeploymentConfiguration.loadFromYaml(template.toString())
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setArtifactId(appConf.artifactId)
@@ -82,10 +87,10 @@ def call(String environment) {
                         ch2deployment.setConnectedAppGrantType("client_credentials")
                         ch2deployment.setBusinessGroupId(appConf.businessGroupId)
                         ch2deployment.setProvider("MC")
-                        ch2deployment.setReplicas("1")
+                        ch2deployment.setReplicas("1") // TODO
                         ch2deployment.setDeploymentTimeout(60000)
 
-                        ch2deployment.setvCores("0.1")
+                        ch2deployment.setvCores("0.1") // TODO
                         ch2deployment.setProperties(appConf.properties)
                         ch2deployment.setPackaging("mule-application")
 
@@ -93,8 +98,29 @@ def call(String environment) {
 
                         ch2deployment.setSkipDeploymentVerification(true)
 
+                        ch2deployment.setSecureProperties(appConf.secureProperties)
+
                         def deploymentSettings = new Cloudhub2DeploymentSettings()
+                        deploymentSettings.setGenerateDefaultPublicUrl(true) // TODO
+                        deploymentSettings.setLastMileSecurity(false) // TODO
+                        if (appConf.ingressPublicUrl != null) {
+                            def inbound = new Inbound()
+                            inbound.setPublicUrl(appConf.ingressPublicUrl)
+                            def http = new Http()
+                            http.setInbound(inbound)
+                            deploymentSettings.setHttp(http)
+                        }
                         ch2deployment.setDeploymentSettings(deploymentSettings)
+
+
+                        def objectStoreV2 = new ObjectStoreV2()
+                        objectStoreV2.setEnabled(true) // TODO
+                        def service = new Service()
+                        service.setObjectStoreV2(objectStoreV2)
+                        def integration = new Integration()
+                        integration.setServices(service)
+                        ch2deployment.setIntegrations(integration)
+
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
                         Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog())

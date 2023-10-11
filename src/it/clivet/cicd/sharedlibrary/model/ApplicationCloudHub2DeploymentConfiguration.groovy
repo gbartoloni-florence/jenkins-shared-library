@@ -2,21 +2,22 @@ package it.clivet.cicd.sharedlibrary.model
 
 import org.yaml.snakeyaml.Yaml
 
-class ApplicationDeploymentConfiguration {
+class ApplicationCloudHub2DeploymentConfiguration {
 
     String artifactId, groupId, version
     String deploymentType
     String anypointClientId, anypointClientSecret, runtimeVersion, applicationName, environment, deploymentTargetId, organization, host, businessGroupId
-    Map secrets, properties
+    String ingressPublicUrl, ingressPathRewrite, ingressLastMileSecurity, ingressForwardSslSession
+    Map secrets, properties, secureProperties
 
-    public static ApplicationDeploymentConfiguration loadFromYaml(File file) {
+    public static ApplicationCloudHub2DeploymentConfiguration loadFromYaml(File file) {
         Yaml parser = new Yaml()
         Map configuration = parser.load(file.text)
 
         return loadFromMap(configuration)
     }
 
-    public static ApplicationDeploymentConfiguration loadFromYaml(String yaml) {
+    public static ApplicationCloudHub2DeploymentConfiguration loadFromYaml(String yaml) {
         Yaml parser = new Yaml()
         Map configuration = parser.load(yaml)
 
@@ -24,8 +25,8 @@ class ApplicationDeploymentConfiguration {
     }
 
 
-    public static ApplicationDeploymentConfiguration loadFromMap(Map configuration) {
-        def conf = new ApplicationDeploymentConfiguration()
+    public static ApplicationCloudHub2DeploymentConfiguration loadFromMap(Map configuration) {
+        def conf = new ApplicationCloudHub2DeploymentConfiguration()
         conf.artifactId = configuration.artifact.artifactId
         conf.groupId = configuration.artifact.groupId
         conf.version = configuration.artifact.version
@@ -39,9 +40,14 @@ class ApplicationDeploymentConfiguration {
         conf.organization = configuration.anypoint.organization
         conf.host = configuration.anypoint.host
         conf.businessGroupId = configuration.anypoint.businessGroupId
+        conf.ingressPublicUrl = configuration.anypoint.ingress.publicUrl
+        conf.ingressPathRewrite = configuration.anypoint.ingress.pathRewrite
+        conf.ingressLastMileSecurity = configuration.anypoint.ingress.lastMileSecurity
+        conf.ingressForwardSslSession = configuration.anypoint.ingress.forwardSslSession
 
         conf.secrets = configuration.secrets
         conf.properties = configuration.properties
+        conf.secureProperties = configuration.secureProperties
 
         return conf
     }
