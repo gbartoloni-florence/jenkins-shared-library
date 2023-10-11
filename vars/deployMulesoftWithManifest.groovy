@@ -39,6 +39,9 @@ def call(String environment) {
                         // def appConf = ApplicationDeploymentConfiguration.loadFromYaml(new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml"))
 
                         def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.key})
+                        creds.each {
+                            echo it.it
+                        }
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")

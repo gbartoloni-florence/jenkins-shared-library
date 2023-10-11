@@ -8,6 +8,7 @@ import com.cloudbees.plugins.credentials.CredentialsProvider
 
 class CredentialRetriever {
     public static List<com.cloudbees.plugins.credentials.Credentials> getCredentials(List<String> secretIds) {
+        def list = []
 
         def jenkinsCredentials = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
                 com.cloudbees.plugins.credentials.Credentials.class,
@@ -18,10 +19,9 @@ class CredentialRetriever {
         for (creds in jenkinsCredentials) {
             println(creds.id)
             if (creds.id in secretIds) {
-
+                list << creds
             }
-
         }
-
+        return list;
     }
 }
