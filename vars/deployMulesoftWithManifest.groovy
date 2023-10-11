@@ -5,6 +5,7 @@
 import org.yaml.snakeyaml.Yaml
 import org.mule.tools.model.anypoint.Cloudhub2Deployment
 import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
+import it.clivet.cicd.sharedlibrary.model.ApplicationDeploymentConfiguration
 
 
 def call(String environment) {
