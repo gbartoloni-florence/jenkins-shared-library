@@ -56,7 +56,7 @@ def call(String environment) {
                         def engine = new groovy.text.SimpleTemplateEngine()
                         def template = engine.createTemplate(manifest).make(binding)
 
-                        Map configurationWithSecrets = parser.load(template)
+                        Map configurationWithSecrets = parser.load(template.toString())
                         echo "config = $configurationWithSecrets"
 
                         def appConf = ApplicationDeploymentConfiguration.loadFromYaml(manifest)
