@@ -10,6 +10,7 @@ import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 import it.clivet.cicd.sharedlibrary.model.ApplicationDeploymentConfiguration
 import it.clivet.cicd.sharedlibrary.utils.JenkinsLog
 
+import static org.mule.tools.validation.DeploymentValidatorFactory.createDeploymentValidator;
 
 def call(String environment) {
     pipeline {
@@ -90,6 +91,8 @@ def call(String environment) {
                         ch2deployment.setUri("https://" + appConf.host)
 
                         echo ch2deployment.getApplicationName()
+
+                        createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
                         Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog());
                         deployer.deploy();
