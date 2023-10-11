@@ -40,7 +40,7 @@ def call(String environment) {
 
                         def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.value})
                         creds.each {
-                            echo it.it
+                            echo it.id
                         }
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
