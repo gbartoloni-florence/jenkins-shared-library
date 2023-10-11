@@ -65,7 +65,7 @@ def call(String environment) {
                         Map configurationWithSecrets = parser.load(template.toString())
                         echo "config = $configurationWithSecrets"
 
-                        def appConf = ApplicationDeploymentConfiguration.loadFromYaml(manifest)
+                        def appConf = ApplicationDeploymentConfiguration.loadFromYaml(template.toString())
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setArtifactId(appConf.artifactId)
