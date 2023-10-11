@@ -2,6 +2,7 @@
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
 
+import java.util.logging.Logger
 import org.yaml.snakeyaml.Yaml
 import org.mule.tools.model.anypoint.Cloudhub2Deployment
 import org.mule.tools.deployment.DefaultDeployer;
