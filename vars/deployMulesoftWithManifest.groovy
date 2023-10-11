@@ -91,9 +91,10 @@ def call(String environment) {
 
                         ch2deployment.setUri("https://" + appConf.host)
 
+                        ch2deployment.setSkipDeploymentVerification(true)
+
                         def deploymentSettings = new Cloudhub2DeploymentSettings()
                         ch2deployment.setDeploymentSettings(deploymentSettings)
-
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
                         Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog())
