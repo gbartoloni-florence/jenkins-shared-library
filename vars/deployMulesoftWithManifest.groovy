@@ -33,15 +33,22 @@ def call(String environment) {
                         // sh "anypoint-cli-v4 --version"
 
                         Yaml parser = new Yaml()
-                        Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml")).text)
+                        def manifest = (new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml")).text
+                        Map configuration = parser.load(manifest)
                         echo "config = $configuration"
 
                         // def appConf = ApplicationDeploymentConfiguration.loadFromYaml(new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml"))
 
                         def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.value})
                         creds.each {
-                            echo it.id
+                            echo it.id + ": " + it.getClass()
                         }
+
+
+
+                        def engine = new groovy.text.SimpleTemplateEngine()
+                        def template = engine.createTemplate(manifest).make(binding)
+
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
