@@ -47,6 +47,6 @@ class JenkinsLog implements DeployerLog {
   @Override
   @NonCPS
   public boolean isDebugEnabled() {
-    return log.isDebugEnabled()
+    return true
   }
 }
