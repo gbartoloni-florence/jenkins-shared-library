@@ -1,6 +1,8 @@
 package it.clivet.cicd.sharedlibrary.utils
 
 import java.util.logging.Logger
+import org.mule.tools.utils.DeployerLog;
+
 
 class JenkinsLog implements DeployerLog {
 
