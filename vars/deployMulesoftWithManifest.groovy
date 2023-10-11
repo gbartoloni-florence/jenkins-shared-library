@@ -47,13 +47,13 @@ def call(String environment) {
                         Yaml parser = new Yaml()
                         def manifest = (new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml")).text
                         Map configuration = parser.load(manifest)
-                        echo "config = $configuration"
+                        // echo "config = $configuration"
 
 
                         def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.value})
-                        creds.each {
-                            echo it.id + ": " + it.getClass()
-                        }
+                        // creds.each {
+                        //    echo it.id + ": " + it.getClass()
+                        // }
 
                         def binding = [:]
 
@@ -69,7 +69,7 @@ def call(String environment) {
                         def template = engine.createTemplate(manifest).make(binding)
 
                         Map configurationWithSecrets = parser.load(template.toString())
-                        echo "config = $configurationWithSecrets"
+                        // echo "config = $configurationWithSecrets"
 
                         def appConf = ApplicationCloudHub2DeploymentConfiguration.loadFromYaml(template.toString())
 
