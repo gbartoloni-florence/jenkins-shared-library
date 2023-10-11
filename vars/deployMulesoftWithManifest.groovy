@@ -1,10 +1,10 @@
-import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 @GrabResolver(name='mulesoft', root='https://repository.mulesoft.org/releases')
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
 
 import org.yaml.snakeyaml.Yaml
 import org.mule.tools.model.anypoint.Cloudhub2Deployment
+import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 
 
 def call(String environment) {
