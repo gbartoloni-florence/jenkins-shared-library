@@ -6,7 +6,7 @@ class ApplicationDeploymentConfiguration {
 
     String artifactId, groupId, version
     String deploymentType
-    String anypointClientId, anypointClientSecret, runtimeVersion, applicationName, environment, deploymentTargetId, organization, host
+    String anypointClientId, anypointClientSecret, runtimeVersion, applicationName, environment, deploymentTargetId, organization, host, businessGroupId
     Map secrets, properties
 
     public static ApplicationDeploymentConfiguration loadFromYaml(File file) {
@@ -38,6 +38,7 @@ class ApplicationDeploymentConfiguration {
         conf.deploymentTargetId = configuration.anypoint.deploymentTargetId
         conf.organization = configuration.anypoint.organization
         conf.host = configuration.anypoint.host
+        conf.businessGroupId = configuration.anypoint.businessGroupId
 
         conf.secrets = configuration.secrets
         conf.properties = configuration.properties

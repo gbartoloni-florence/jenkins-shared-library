@@ -78,6 +78,10 @@ def call(String environment) {
                         ch2deployment.setConnectedAppClientId(appConf.anypointClientId)
                         ch2deployment.setConnectedAppClientSecret(appConf.anypointClientSecret)
                         ch2deployment.setConnectedAppGrantType("client_credentials")
+                        ch2deployment.setBusinessGroupId(appConf.businessGroupId)
+                        ch2deployment.setProvider("MC")
+                        ch2deployment.setReplicas("1")
+                        ch2deployment.setDeploymentTimeout(60000)
 
                         ch2deployment.setvCores("0.1")
                         ch2deployment.setProperties(appConf.properties)
