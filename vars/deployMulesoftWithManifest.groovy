@@ -90,7 +90,10 @@ def call(String environment) {
 
                         ch2deployment.setUri("https://" + appConf.host)
 
-                        echo ch2deployment.getApplicationName()
+                        echo ch2deployment.toString()
+
+                        System.setProperty("http.proxyHost", "192.168.1.100"),
+                        System.setProperty("http.proxyPort", "9090")
 
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
