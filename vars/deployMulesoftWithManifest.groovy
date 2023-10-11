@@ -38,7 +38,7 @@ def call(String environment) {
 
                         // def appConf = ApplicationDeploymentConfiguration.loadFromYaml(new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml"))
 
-                        def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.key})
+                        def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.value})
                         creds.each {
                             echo it.it
                         }
