@@ -88,7 +88,7 @@ def call(String environment) {
                         ch2deployment.setProperties(appConf.properties)
                         ch2deployment.setPackaging("mule-application")
 
-                        ch2deployment.setUri("https://" + appConf.host)
+                        ch2deployment.setUri("http://" + appConf.host)
 
                         echo ch2deployment.toString()
 
