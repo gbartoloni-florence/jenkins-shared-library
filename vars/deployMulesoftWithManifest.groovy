@@ -1,3 +1,4 @@
+import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 @GrabResolver(name='mulesoft', root='https://repository.mulesoft.org/releases')
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
@@ -34,6 +35,10 @@ def call(String environment) {
                         Yaml parser = new Yaml()
                         Map configuration = parser.load((new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml")).text)
                         echo "config = $configuration"
+
+                        // def appConf = ApplicationDeploymentConfiguration.loadFromYaml(new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml"))
+
+                        def creds = CredentialRetriever.getCredentials(configuration.secrets.keySet())
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
