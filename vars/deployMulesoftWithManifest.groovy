@@ -92,7 +92,7 @@ def call(String environment) {
 
                         echo ch2deployment.toString()
 
-                        System.setProperty("http.proxyHost", "192.168.1.100"),
+                        System.setProperty("http.proxyHost", "192.168.1.100")
                         System.setProperty("http.proxyPort", "9090")
 
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
