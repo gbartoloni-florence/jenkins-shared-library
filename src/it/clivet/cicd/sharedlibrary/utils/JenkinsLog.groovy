@@ -41,6 +41,6 @@ class JenkinsLog implements DeployerLog {
 
   @Override
   public boolean isDebugEnabled() {
-    return true;
+    return log.isDebugEnabled();
   }
 }
