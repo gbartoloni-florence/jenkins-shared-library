@@ -88,12 +88,7 @@ def call(String environment) {
                         ch2deployment.setProperties(appConf.properties)
                         ch2deployment.setPackaging("mule-application")
 
-                        ch2deployment.setUri("http://" + appConf.host)
-
-                        echo ch2deployment.toString()
-
-                        System.setProperty("http.proxyHost", "192.168.1.100")
-                        System.setProperty("http.proxyPort", "9090")
+                        ch2deployment.setUri("https://" + appConf.host)
 
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
