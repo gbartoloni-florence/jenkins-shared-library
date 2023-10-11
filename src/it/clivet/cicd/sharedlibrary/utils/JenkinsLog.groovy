@@ -31,7 +31,7 @@ class JenkinsLog implements DeployerLog {
 
   @Override
   public void debug(String charSequence) {
-    log.debug(charSequence);
+    log.info(charSequence);
   }
 
   @Override
