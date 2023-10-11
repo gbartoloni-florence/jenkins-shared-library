@@ -12,7 +12,6 @@ class ApplicationDeploymentConfiguration {
     public static ApplicationDeploymentConfiguration loadFromYaml(File file) {
         Yaml parser = new Yaml()
         Map configuration = parser.load(file.text)
-        echo "config = $configuration"
 
         return loadFromMap(configuration)
     }
@@ -20,7 +19,6 @@ class ApplicationDeploymentConfiguration {
     public static ApplicationDeploymentConfiguration loadFromYaml(String yaml) {
         Yaml parser = new Yaml()
         Map configuration = parser.load(yaml)
-        echo "config = $configuration"
 
         return loadFromMap(configuration)
     }
