@@ -2,13 +2,13 @@
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
 
-import java.util.logging.Logger
 import org.yaml.snakeyaml.Yaml
 import org.mule.tools.model.anypoint.Cloudhub2Deployment
 import org.mule.tools.deployment.DefaultDeployer;
 import org.mule.tools.deployment.Deployer;
 import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 import it.clivet.cicd.sharedlibrary.model.ApplicationDeploymentConfiguration
+import it.clivet.cicd.sharedlibrary.utils.JenkinsLog
 
 
 def call(String environment) {
@@ -82,9 +82,8 @@ def call(String environment) {
                         ch2deployment.setProperties(appConf.properties)
 
                         echo ch2deployment.getApplicationName()
-                        Logger log = Logger.getLogger('org.example.jobdsl')
 
-                        Deployer deployer = new DefaultDeployer(ch2deployment, log);
+                        Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog());
                         deployer.deploy();
                     }
                 }
