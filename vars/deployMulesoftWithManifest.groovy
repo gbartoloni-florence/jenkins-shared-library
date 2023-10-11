@@ -80,6 +80,7 @@ def call(String environment) {
 
                         ch2deployment.setvCores("0.1")
                         ch2deployment.setProperties(appConf.properties)
+                        ch2deployment.setPackaging("mule-application")
 
                         echo ch2deployment.getApplicationName()
 
