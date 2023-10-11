@@ -48,7 +48,7 @@ def call(String environment) {
                         creds.each { cred ->
                             def secret = configuration.secrets.find{it.value == cred.id}
                             println secret
-                            binding << secret
+                            binding << secret.key : cred
                         }
 
                         println binding
