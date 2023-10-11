@@ -14,6 +14,19 @@ class ApplicationDeploymentConfiguration {
         Map configuration = parser.load(file.text)
         echo "config = $configuration"
 
+        return loadFromMap(configuration)
+    }
+
+    public static ApplicationDeploymentConfiguration loadFromYaml(String yaml) {
+        Yaml parser = new Yaml()
+        Map configuration = parser.load(yaml)
+        echo "config = $configuration"
+
+        return loadFromMap(configuration)
+    }
+
+
+    public static ApplicationDeploymentConfiguration loadFromMap(Map configuration) {
         def conf = new ApplicationDeploymentConfiguration()
         conf.artifactId = configuration.artifact.artifactId
         conf.groupId = configuration.artifact.groupId
@@ -30,5 +43,8 @@ class ApplicationDeploymentConfiguration {
 
         conf.secrets = configuration.secrets
         conf.properties = configuration.properties
+
+        return conf
     }
+
 }

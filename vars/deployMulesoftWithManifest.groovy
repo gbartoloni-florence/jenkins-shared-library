@@ -37,7 +37,6 @@ def call(String environment) {
                         Map configuration = parser.load(manifest)
                         echo "config = $configuration"
 
-                        // def appConf = ApplicationDeploymentConfiguration.loadFromYaml(new File(workspace + "/manifests/" + environment + "/" + params.Application + "-" + environment + ".manifest.yaml"))
 
                         def creds = CredentialRetriever.getCredentials(configuration.secrets.collect{entry -> entry.value})
                         creds.each {
@@ -57,8 +56,10 @@ def call(String environment) {
                         def engine = new groovy.text.SimpleTemplateEngine()
                         def template = engine.createTemplate(manifest).make(binding)
 
-                        Map configurationWithSecrets = parser.load(manifest)
+                        Map configurationWithSecrets = parser.load(template)
                         echo "config = $configurationWithSecrets"
+
+                        def appConf = ApplicationDeploymentConfiguration.loadFromYaml(manifest)
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
