@@ -1,3 +1,4 @@
+import org.mule.tools.model.anypoint.Cloudhub2DeploymentSettings
 @GrabResolver(name='mulesoft', root='https://repository.mulesoft.org/releases')
 @Grab(group='org.mule.tools.maven', module='mule-deployer', version='3.8.7')
 
@@ -89,6 +90,9 @@ def call(String environment) {
                         ch2deployment.setPackaging("mule-application")
 
                         ch2deployment.setUri("https://" + appConf.host)
+
+                        def deploymentSettings = new Cloudhub2DeploymentSettings()
+                        ch2deployment.setDeploymentSettings(deploymentSettings)
 
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
