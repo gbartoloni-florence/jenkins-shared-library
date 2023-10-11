@@ -32,6 +32,7 @@ def call(String environment) {
                     script {
                         echo params.Application
                         echo environment
+                        def applicationDefaultName = params.Application + "-" + environment
                         // sh "npm install -g anypoint-cli-v4"
                         // sh "anypoint-cli-v4 --version"
 
@@ -65,9 +66,19 @@ def call(String environment) {
                         def appConf = ApplicationDeploymentConfiguration.loadFromYaml(manifest)
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
+                        ch2deployment.setArtifactId(appConf.artifactId)
+                        ch2deployment.setGroupId(appConf.groupId)
+                        ch2deployment.setVersion(appConf.version)
+
+                        ch2deployment.setApplicationName(applicationDefaultName)
+                        ch2deployment.setMuleVersion(appConf.runtimeVersion)
+                        ch2deployment.setTarget(appConf.deploymentTargetId)
+                        ch2deployment.setEnvironment(appConf.environment)
+                        ch2deployment.setConnectedAppClientId(appConf.anypointClientId)
+                        ch2deployment.setConnectedAppClientSecret(appConf.anypointClientSecret)
+
                         ch2deployment.setvCores("0.1")
-                        ch2deployment.setEnvironment(appConf.)
-                        ch2deployment.setApplicationName(params.Application + "-" + environment)
+                        ch2deployment.setProperties(appConf.properties)
 
                         echo ch2deployment.getApplicationName()
                         Logger log = Logger.getLogger('org.example.jobdsl')
