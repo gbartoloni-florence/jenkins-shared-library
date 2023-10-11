@@ -77,11 +77,12 @@ def call(String environment) {
                         ch2deployment.setEnvironment(appConf.environment)
                         ch2deployment.setConnectedAppClientId(appConf.anypointClientId)
                         ch2deployment.setConnectedAppClientSecret(appConf.anypointClientSecret)
+                        ch2deployment.setConnectedAppGrantType("client_credentials")
 
                         ch2deployment.setvCores("0.1")
                         ch2deployment.setProperties(appConf.properties)
                         ch2deployment.setPackaging("mule-application")
-                        
+
                         ch2deployment.setUri("https://" + appConf.host)
 
                         echo ch2deployment.getApplicationName()
