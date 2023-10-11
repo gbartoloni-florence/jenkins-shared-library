@@ -1,9 +1,6 @@
 def call(Map input) {
   pipeline {
     agent any
-    environment {
-      SETTINGS_XML = credentials(input['MAVEN_SETTINGS']) 
-    }
     stages {
       stage('Package') {
         agent {
@@ -13,7 +10,9 @@ def call(Map input) {
         }
         steps {
           script {
-            sh 'mvn -B clean deploy'
+            withCredentials([file(credentialsId: input['MAVEN_SETTINGS'], variable: 'MAVEN_SETTINGS_XML')]) {
+              sh 'mvn -B -s $MAVEN_SETTINGS_XML clean deploy'
+            }
           }
         }
       }
