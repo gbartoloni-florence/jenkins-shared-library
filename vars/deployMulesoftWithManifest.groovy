@@ -4,6 +4,8 @@
 
 import org.yaml.snakeyaml.Yaml
 import org.mule.tools.model.anypoint.Cloudhub2Deployment
+import org.mule.tools.deployment.DefaultDeployer;
+import org.mule.tools.deployment.Deployer;
 import it.clivet.cicd.sharedlibrary.utils.CredentialRetriever
 import it.clivet.cicd.sharedlibrary.model.ApplicationDeploymentConfiguration
 
@@ -64,10 +66,14 @@ def call(String environment) {
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
-                        ch2deployment.setEnvironment("Dev")
+                        ch2deployment.setEnvironment(appConf.)
                         ch2deployment.setApplicationName(params.Application + "-" + environment)
 
                         echo ch2deployment.getApplicationName()
+                        Logger log = Logger.getLogger('org.example.jobdsl')
+
+                        Deployer deployer = new DefaultDeployer(ch2deployment, log);
+                        deployer.deploy();
                     }
                 }
             }
