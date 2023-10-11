@@ -44,11 +44,21 @@ def call(String environment) {
                             echo it.id + ": " + it.getClass()
                         }
 
+                        def binding = [:]
 
+                        creds.each { cred ->
+                            def secret = secrets.find{it.value == cred.id}
+                            println secret
+                            binding << secret
+                        }
+
+                        println binding
 
                         def engine = new groovy.text.SimpleTemplateEngine()
                         def template = engine.createTemplate(manifest).make(binding)
 
+                        Map configurationWithSecrets = parser.load(manifest)
+                        echo "config = $configurationWithSecrets"
 
                         Cloudhub2Deployment ch2deployment = new Cloudhub2Deployment()
                         ch2deployment.setvCores("0.1")
