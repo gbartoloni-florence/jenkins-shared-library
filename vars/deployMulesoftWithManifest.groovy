@@ -92,8 +92,8 @@ def call(String environment) {
 
                         createDeploymentValidator(ch2deployment).validateMuleVersionAgainstEnvironment()
 
-                        Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog());
-                        deployer.deploy();
+                        Deployer deployer = new DefaultDeployer(ch2deployment, new JenkinsLog())
+                        deployer.deploy()
                     }
                 }
             }
