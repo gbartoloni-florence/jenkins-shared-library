@@ -24,7 +24,13 @@ def call(Map input) {
     post {
         // Clean after build
         always {
-            cleanWs()
+            cleanWs(cleanWhenNotBuilt: true,
+                    cleanWhenFailure: true,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
   }
