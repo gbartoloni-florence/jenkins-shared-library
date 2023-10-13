@@ -3,6 +3,7 @@ def call(Map input) {
     agent {
       docker {
         image 'maven:3.8.6-jdk-8'
+        args '-v $HOME/.m2:/opt/maven/.m2 --env MAVEN_CONFIG=/opt/maven/.m2'
       }
     }
     stages {
