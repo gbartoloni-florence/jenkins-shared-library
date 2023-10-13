@@ -2,7 +2,7 @@ def call(Map input) {
   pipeline {
     agent {
       docker {
-        image 'maven:3.8.7-ibmjava-8'
+        image 'maven:3.8.6-jdk-8'
       }
     }
     stages {
